@@ -15,6 +15,37 @@ feel for it.
 
 */
 
+extern mod std;
+
+use std::{vec,str};
+
+fn xor_encrypt(plaintext: ~str, key: ~str) -> ~str {
+	let bytes: ~[u8] = plaintext.as_bytes().to_owned();
+	let n = bytes.len();
+	let mut i = 0;
+	let mut v;
+	let tot = n * 2;
+	let mut xs: ~[char]  = vec::from_elem(tot, '0');
+	let hex = @['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	let len_k = key.len();
+	
+	while i < n {
+		v = bytes[i] ^ key[i%len_k];
+		xs[i * 2] = hex[v >> 4];
+		xs[i * 2 + 1] = hex[v & 0x0F];
+		i += 1;
+	}
+	str::from_chars(xs)
+	//println( str::from_chars(xs) ); 
+	
+	
+}
+
 fn main () {
+	let key = ~"ICE";
+	let plain_text = 
+~"Burning 'em, if you ain't quick and nimble
+I go crazy when I hear a cymbal";
+	println( xor_encrypt(plain_text,key) );
 	
 }
