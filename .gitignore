@@ -1,4 +1,9 @@
 *~
+*
+!*.rs
+!*.c
+!*.o
+!*.rust
 \#*\#
 \#*
 .#*
@@ -44,6 +49,7 @@
 *.tmp
 *.pyc
 *.elc
+*.rust
 .hg/
 .hgignore
 .cproject
