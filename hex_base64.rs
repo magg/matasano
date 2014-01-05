@@ -55,7 +55,7 @@ pub fn base64_to_hex(base64_string: ~str) -> ~str {
 	let mut i = 0;
 	let mut v;
 	let mut xs: ~[char]  = vec::from_elem(tot, '0');
-	let hex = @['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+	let hex = @['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
 
 	while i < n {
 		v = bytes[i] & 0xFF;
