@@ -22,9 +22,7 @@ extern mod extra;
 extern mod std;
 use std::{u8};
 
-mod hex_base64;
-
-fn xor_vectors(string1: ~str, string2: ~str) {
+pub fn xor_vectors(string1: ~str, string2: ~str) -> ~str {
 	
 	let n = string1.len();
 	let mut i = 0;
@@ -32,14 +30,9 @@ fn xor_vectors(string1: ~str, string2: ~str) {
 	if n != string2.len(){
 		fail!(~"Fail! No equal size");
 	}
-		
-	let s1 = hex_base64::base64_to_hex(string1);
-	let s2 = hex_base64::base64_to_hex(string2);
 	
-	let temp1: ~str =  hex_base64::hex_to_base64(s1);
-	let xs1: ~[u8] = temp1.as_bytes().to_owned();
-	let temp2: ~str =  hex_base64::hex_to_base64(s2);
-	let xs2: ~[u8] = temp2.as_bytes().to_owned();
+	let xs1: ~[u8] = string1.as_bytes().to_owned();
+	let xs2: ~[u8] = string2.as_bytes().to_owned();
 	
 	let mut res: ~str = ~"";
 	
@@ -55,11 +48,12 @@ fn xor_vectors(string1: ~str, string2: ~str) {
 						let y: ~str = x.to_str_radix(16);
 						res.push_str(y);
 					},
-		      _ => { println("Error: bad value"); break;}
+			   _ => ()	
+		      //_ => { println("Error: bad value"); break;}
 		    }
 		i += 2;
 	} 
-	println(fmt!("%s", res)); 	
+	res	
 
 }
 
@@ -67,6 +61,7 @@ fn main () {
 	
 	let string1 = ~"1c0111001f010100061a024b53535009181c";
 	let string2 = ~"686974207468652062756c6c277320657965";
-	xor_vectors(string1,string2);
+	let res = xor_vectors(string1,string2);
+	println(fmt!("%s", res)); 
 		
 }
