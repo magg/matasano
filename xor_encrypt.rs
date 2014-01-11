@@ -26,7 +26,7 @@ fn xor_encrypt(plaintext: ~str, key: ~str) -> ~str {
 	let mut v;
 	let tot = n * 2;
 	let mut xs: ~[char]  = vec::from_elem(tot, '0');
-	let hex = @['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	let hex = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
 	let len_k = key.len();
 	
 	while i < n {

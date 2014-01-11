@@ -62,6 +62,6 @@ fn main () {
 	let string1 = ~"1c0111001f010100061a024b53535009181c";
 	let string2 = ~"686974207468652062756c6c277320657965";
 	let res = xor_vectors(string1,string2);
-	println(fmt!("%s", res)); 
+	println(format!("{:s}", res)); 
 		
 }

@@ -33,10 +33,10 @@ struct Bucket {
 }
 
 fn frequency_analysis(string: ~str) -> int {
-	let mut score: float = 0.0;
+	let mut score: f32 = 0.0;
 	let mut map = HashMap::<char, int>::new();	
-	let freq: ~[float] = ~[8.167,1.492,2.782,4.253,12.70,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074,21.467];	
-	let mut freq_per: ~[float] = vec::from_elem(27, 0.0);;
+	let freq: ~[f32] = ~[8.167,1.492,2.782,4.253,12.70,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074,21.467];	
+	let mut freq_per: ~[f32] = vec::from_elem(27, 0.0f32);;
 	
 	let res_string = convert_to_lowercase(string.clone());
 	let n = res_string.len();	
@@ -49,17 +49,17 @@ fn frequency_analysis(string: ~str) -> int {
 		let c = i as u32;
         let cr = c + 'a' as u32;
 		let mut ch = from_u32(cr).unwrap();
-		let mut mapv_float = 0.0;
+		let mut mapv_f32 = 0.0;
 		if i == 26 {
 			ch = ' '; 
 		}
 		if map.contains_key(&ch){
 			let map_val = map.get(&ch);
-			mapv_float = *map_val as float;
+			mapv_f32 = *map_val as f32;
 		}
 			
-		let n_float = n as float;
-		freq_per[i] = 100.0 * mapv_float / n_float;
+		let n_f32 = n as f32;
+		freq_per[i] = 100.0 * mapv_f32 / n_f32;
 		//println(fmt!("%c %9.6f", ch, freq_per[i] ));
 		score +=  abs(freq[i] - freq_per[i]);	
 	}
