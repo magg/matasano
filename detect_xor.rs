@@ -10,6 +10,18 @@ has been encrypted by single-character XOR. Find it. (Your code from
 
 */
 
-fn main () {
+use std::io::buffered::BufferedReader;
+use std::io::File;
+
+fn detect_xor() { 
 	
+	let path = Path::new("gistfile1.txt");
+	let mut file = BufferedReader::new(File::open(&path));
+	for line in file.lines() {
+	    print!("{}", line);
+	}	
+}
+
+fn main () {
+	 detect_xor();
 }
