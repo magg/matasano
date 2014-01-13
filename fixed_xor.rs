@@ -21,8 +21,9 @@ The string:
 extern mod extra;
 extern mod std;
 use std::{u8};
+use extra::hex::{ToHex};
 
-pub fn xor_vectors(string1: ~str, string2: ~str) -> ~str {
+pub fn xor_vectors(string1: &str, string2: &str) -> ~str {
 	
 	let n = string1.len();
 	let mut i = 0;
@@ -34,8 +35,10 @@ pub fn xor_vectors(string1: ~str, string2: ~str) -> ~str {
 	let xs1: ~[u8] = string1.as_bytes().to_owned();
 	let xs2: ~[u8] = string2.as_bytes().to_owned();
 	
-	let mut res: ~str = ~"";
+	//let mut res: ~str = ~"";
 	
+ 	let mut nums: ~[u8] = ~[];	
+
 	let tam = xs1.len();
 	while i < tam {
 		
@@ -45,15 +48,19 @@ pub fn xor_vectors(string1: ~str, string2: ~str) -> ~str {
 		match (slice1, slice2) {
 		      (Some(a), Some(b)) => {
 						let x: u8 = a ^ b;
-						let y: ~str = x.to_str_radix(16);
-						res.push_str(y);
+						nums.push(x);
+						//let y: ~str = x.to_str_radix(16);
+						//res.push_str(y);
 					},
 			   _ => ()	
 		      //_ => { println("Error: bad value"); break;}
 		    }
 		i += 2;
-	} 
-	res	
+	}
+	let string = nums.to_hex();
+	//println(format!("{:s}", string)); 
+	string
+	//res	
 
 }
 

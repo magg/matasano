@@ -24,7 +24,7 @@ use std::num::from_str_radix;
 use extra::base64::{ToBase64,STANDARD};
 use extra::base64::FromBase64;
 
-pub fn hex_to_base64(hex_string: ~str) -> ~str {
+pub fn hex_to_base64(hex_string: &str) -> ~str {
 	let n = hex_string.len();
 	let tot = n / 2;
 	let mut xs: ~[u8]  = vec::from_elem(tot, 0u8);
@@ -47,7 +47,7 @@ pub fn hex_to_base64(hex_string: ~str) -> ~str {
 
 }
 
-pub fn base64_to_hex(base64_string: ~str) -> ~str {
+pub fn base64_to_hex(base64_string: &str) -> ~str {
 	let res = base64_string.from_base64();
 	let bytes = res.unwrap();
 	let n = bytes.len();

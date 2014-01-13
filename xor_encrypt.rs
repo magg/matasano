@@ -19,7 +19,7 @@ extern mod std;
 
 use std::{vec,str};
 
-fn xor_encrypt(plaintext: ~str, key: ~str) -> ~str {
+fn xor_encrypt(plaintext: &str, key: &str) -> ~str {
 	let bytes: ~[u8] = plaintext.as_bytes().to_owned();
 	let n = bytes.len();
 	let mut i = 0;
