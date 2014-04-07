@@ -15,14 +15,15 @@ Evaluate each output and choose the one with the best score.
 Tune your algorithm until this works.
 
 */
-extern mod extra;
-extern mod std;
-use std::{str,vec};
+extern crate collections;
+extern crate serialize;
+extern crate std;
 
-use std::hashmap::HashMap;
-use std::trie::TrieMap;
+use collections::hashmap::HashMap;
+use collections::trie::TrieMap;
+use serialize::hex::{FromHex, ToHex};
+use std::{str,slice};
 use std::char::from_u32;
-use extra::hex::{FromHex, ToHex};
 use std::num::abs;
 
 mod fixed_xor;
@@ -38,7 +39,7 @@ fn frequency_analysis(string: &str) -> int {
 	let mut score: f32 = 0.0;
 	let mut map = HashMap::<char, int>::new();	
 	let freq: ~[f32] = ~[8.167,1.492,2.782,4.253,12.70,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074,21.467];	
-	let mut freq_per: ~[f32] = vec::from_elem(27, 0.0f32);;
+	let mut freq_per: ~[f32] = slice::from_elem(27, 0.0f32);;
 	
 	let res_string = convert_to_lowercase(string);
 	
@@ -78,7 +79,7 @@ fn frequency_analysis(string: &str) -> int {
 
 fn convert_to_lowercase(string: &str) -> ~str {
  	let n = string.len();	
-	let mut xs: ~[u8]  = vec::from_elem(n, 0u8);
+	let mut xs: ~[u8]  = slice::from_elem(n, 0u8);
 	for i in range(0, n) {
 		let c = string[i] as char;
 		//if !c.is_ascii() {
@@ -88,7 +89,7 @@ fn convert_to_lowercase(string: &str) -> ~str {
 		xs[i] = cl;
 	}
 		
-	let result_str = str::from_utf8_owned(xs);
+	let result_str = str::from_utf8_owned(xs).unwrap();
 	//println(fmt!("%s",result_str));
  
 	result_str
@@ -134,7 +135,7 @@ pub fn xor_cipher_break(cyphertext: &str) -> Candidate  {
 	
 		let mut bytes = res.from_hex().unwrap();
 		replace_invalid_utf8(bytes);
-		let result_str = str::from_utf8_owned(bytes);		 	
+		let result_str = str::from_utf8_owned(bytes).unwrap();		 	
 		let score = frequency_analysis( result_str );
 		let key = score as uint;
 		let value =  Bucket { c: get_char_from_int(i), s: result_str };

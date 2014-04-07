@@ -15,9 +15,9 @@ feel for it.
 
 */
 
-extern mod std;
+extern crate std;
 
-use std::{vec,str};
+use std::{slice,str};
 
 fn xor_encrypt(plaintext: &str, key: &str) -> ~str {
 	let bytes: ~[u8] = plaintext.as_bytes().to_owned();
@@ -25,7 +25,7 @@ fn xor_encrypt(plaintext: &str, key: &str) -> ~str {
 	let mut i = 0;
 	let mut v;
 	let tot = n * 2;
-	let mut xs: ~[char]  = vec::from_elem(tot, '0');
+	let mut xs: ~[char]  = slice::from_elem(tot, '0');
 	let hex = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
 	let len_k = key.len();
 	
@@ -46,6 +46,6 @@ fn main () {
 	let plain_text = 
 ~"Burning 'em, if you ain't quick and nimble
 I go crazy when I hear a cymbal";
-	println( xor_encrypt(plain_text,key) );
+	println!( "{}", xor_encrypt(plain_text,key) );
 	
 }

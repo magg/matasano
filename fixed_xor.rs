@@ -18,10 +18,10 @@ The string:
 
 */
 
-extern mod extra;
-extern mod std;
+extern crate serialize;
+extern crate std;
+use serialize::hex::{ToHex};
 use std::{u8};
-use extra::hex::{ToHex};
 
 pub fn xor_vectors(string1: &str, string2: &str) -> ~str {
 	
@@ -69,6 +69,6 @@ fn main () {
 	let string1 = ~"1c0111001f010100061a024b53535009181c";
 	let string2 = ~"686974207468652062756c6c277320657965";
 	let res = xor_vectors(string1,string2);
-	println(format!("{:s}", res)); 
+	println!("{:s}", res); 
 		
 }
